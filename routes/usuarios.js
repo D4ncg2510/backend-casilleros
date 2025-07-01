@@ -5,6 +5,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { verificarToken, SECRET } = require('../middleware/auth'); // <-- Cambié auth por verificarToken
 
+db.query('SELECT NOW()')
+  .then(res => console.log('Conexión a DB exitosa:', res.rows[0]))
+  .catch(err => console.error('Error al conectar con la DB:', err));
+
+
 // Registro de usuario
 router.post('/', async (req, res) => {
   const { correo, contrasena, rol } = req.body;
