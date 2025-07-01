@@ -19,12 +19,13 @@ router.post('/', async (req, res) => {
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    if (err.code === '23505') {
-      res.status(409).json({ error: 'El correo ya está registrado' });
-    } else {
-      res.status(500).json({ error: 'Error al registrar usuario' });
-    }
+  console.error('Error al registrar usuario:', err); // <-- aquí saldrá lo que necesitas en los logs de Render
+  if (err.code === '23505') {
+    res.status(409).json({ error: 'El correo ya está registrado' });
+  } else {
+    res.status(500).json({ error: 'Error al registrar usuario' });
   }
+}
 });
 
 // Login de usuario
